@@ -2,22 +2,25 @@ package com.example.demo_test.entities;
 
 
 import jakarta.persistence.*;
-import lombok.Data;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 
 @Entity
-@Data
 @Table(name = "employees")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long employeeId;
+    private Long id;
 
-    private String employeeName;
-    private String email;
+    @Column(nullable = false)
+    private String name;
 
-   @ManyToOne
-    @JoinColumn(name = "department_id", nullable = false)
-    @JsonIgnoreProperties("employees")  
-    private Department department;
+    @Column(nullable = false)
+    private int age;
+
+    @Column(nullable = false)
+    private double salary;
 }

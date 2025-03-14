@@ -28,9 +28,9 @@ public class EmployeeService {
     public Employee updateEmployee(Long id, Employee updatedEmployee) {
         Employee existingEmployee = employeeRepository.findById(id).orElse(null);
         if (existingEmployee != null) {
-            existingEmployee.setEmployeeName(updatedEmployee.getEmployeeName());
-            existingEmployee.setEmail(updatedEmployee.getEmail());
-            existingEmployee.setDepartment(updatedEmployee.getDepartment());
+            existingEmployee.setName(updatedEmployee.getName());
+            existingEmployee.setAge(updatedEmployee.getAge());
+            existingEmployee.setSalary(updatedEmployee.getSalary());
             return employeeRepository.save(existingEmployee);
         }
         return null;

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Use useNavigate instead of useHistory
+import { useNavigate } from 'react-router-dom'; 
 
-const AddCategory = () => {
+const AddEmployee = () => {
     const [name, setName] = useState('');
+    const [age, setAge] = useState('');
+    const [salary, setSalary] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const navigate = useNavigate();
@@ -16,30 +18,30 @@ const AddCategory = () => {
             return;
         }
 
-        const newCategory = { name };
+        const newEmployee = { name , age, salary };
         setLoading(true);
         setError('');
 
         try {
-            await axios.post('/categories/save', newCategory);
-            alert('Category has been added!');
+            await axios.post('/employees/create', newEmployee);
+            alert('Employee has been added!');
             setName('');
             
         } catch (error) {
-            console.error('Error adding category:', error);
-            setError('An error occurred while adding the category.!');
+            console.error('Error adding employee:', error);
+            setError('An error occurred while adding the employee.!');
         } finally {
             setLoading(false);
         }
     };
 
-    const goBackToCategoryList = () => {
-        navigate('/categories');
+    const goBackToEmployeeList = () => {
+        navigate('/');
     };
 
     return (
         <div className="container">
-            <h2 className="my-4">Create Category</h2>
+            <h2 className="my-4">Create Employee</h2>
             {error && <p className="text-danger">{error}</p>}
 
             <form onSubmit={handleSubmit} className="mb-4">
@@ -48,9 +50,33 @@ const AddCategory = () => {
                         type="text" 
                         id="name"
                         className="form-control" 
-                        placeholder="Category Name"
+                        placeholder="Name"
                         value={name} 
                         onChange={(e) => setName(e.target.value)} 
+                        required 
+                        style={{ width: '450px' }}
+                    />
+                </div>
+                <div className="mb-3">
+                    <input 
+                        type="text" 
+                        id="number"
+                        className="form-control" 
+                        placeholder="Age"
+                        value={age} 
+                        onChange={(e) => setAge(e.target.value)} 
+                        required 
+                        style={{ width: '450px' }}
+                    />
+                </div>
+                <div className="mb-3">
+                    <input 
+                        type="text" 
+                        id="number"
+                        className="form-control" 
+                        placeholder="Salary"
+                        value={salary} 
+                        onChange={(e) => setSalary(e.target.value)} 
                         required 
                         style={{ width: '450px' }}
                     />
@@ -62,15 +88,15 @@ const AddCategory = () => {
                         className="btn btn-primary" 
                         disabled={loading}
                     >
-                        {loading ? 'Adding category...' : 'Adding category'}
+                        {loading ? 'Adding employee...' : 'Adding employee'}
                     </button>
                     ||
                     <button 
                         type="button" 
                         className="btn btn-secondary" 
-                        onClick={goBackToCategoryList}
+                        onClick={goBackToEmployeeList}
                     >
-                        Back to Category List
+                        Back to Employee List
                     </button>
                 </div>
             </form>
@@ -78,4 +104,4 @@ const AddCategory = () => {
     );
 };
 
-export default AddCategory;
+export default AddEmployee;
