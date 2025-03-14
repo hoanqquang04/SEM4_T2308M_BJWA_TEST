@@ -1,0 +1,15 @@
+CREATE DATABASE IF NOT EXISTS salary_management;
+USE salary_management;
+CREATE TABLE IF NOT EXISTS employee (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    age INT NOT NULL,
+    salary DOUBLE NOT NULL,
+    CONSTRAINT uk_employee_name UNIQUE (name)
+);
+INSERT INTO employee (name, age, salary) VALUES
+('Marry', 30, 70000),
+('Tom', 40, 90000);
+INSERT INTO employee (name, age, salary) VALUES
+('Jerry', 30, 12000),
+('Petter', 42, 15000);
